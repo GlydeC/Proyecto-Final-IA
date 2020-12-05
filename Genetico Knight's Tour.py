@@ -4,7 +4,7 @@ import random
 from collections import deque, defaultdict
 import time
 
-poblacion_tamaño = 100000
+poblacion_tamaño = 50000
 generaciones_max = 20000
 
 def checar_repetido_lista(lista, individuo):
