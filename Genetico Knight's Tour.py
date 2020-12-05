@@ -4,7 +4,7 @@ import random
 from collections import deque, defaultdict
 import time
 
-poblacion_tamaño = 10000
+poblacion_tamaño = 100000
 generaciones_max = 20000
 tamaño_tablero = 5
 posicion_inicial = (random.randint(0, tamaño_tablero-1), random.randint(0, tamaño_tablero-1))
@@ -252,13 +252,7 @@ def algoritmo_genetico_KT():
     poblacion_inicial = generarPoblacionInicial(tamaño_individuo)
     poblacion_inicial_valores = list()
     for i in range(len(poblacion_inicial)):
-        
-        print(dividir_individuo(poblacion_inicial[i]))
-        print(interpretar_individuo(poblacion_inicial[i]))
         poblacion_inicial_valores.append(evaluar_individuo(poblacion_inicial[i], tamaño_tablero))
-
-    
-    print(poblacion_inicial_valores)
     
     generacion_nueva_valores = list()
     individuos_aptos = list()
