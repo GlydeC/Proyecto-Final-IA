@@ -4,8 +4,10 @@ import random
 from collections import deque, defaultdict
 import time
 
-poblacion_tamaño = 50000
+poblacion_tamaño = 10000
 generaciones_max = 20000
+tamaño_tablero = 5
+posicion_inicial = (random.randint(0, tamaño_tablero-1), random.randint(0, tamaño_tablero-1))
 
 def checar_repetido_lista(lista, individuo):
     for i in range(len(lista)):
@@ -88,7 +90,7 @@ def encontrar_maximo(poblacion, poblacion_valores):
     return individuo_maximo_posicion
 
 def interpretar_individuo(ind):
-    posicion_actual = (0,0)
+    posicion_actual = posicion_inicial
     individuo = dividir_individuo(ind)
     z = 3
     lista_movimientos_individuo = list()
@@ -224,35 +226,6 @@ def checar_repetidos_tuplas(lista_tuplas, individuo_tupla):
                 return True
     return False
 
-def reparar_idividuo_fuera_tabla(bit1, bit2, bit3):
-    bits = juntar_individuo(bit1 + bit2 + bit3)
-    
-    if bits == '000':
-        rbits = '100'
-    elif bits == '001':
-        rbits = '101'
-    elif bits == '010':
-        rbits = '110'
-    elif bits == '011':
-        rbits = '111'
-
-    elif bits == '100':
-        rbits = '000'
-    elif bits == '101':
-        rbits = '001'
-    elif bits == '110':
-        rbits = '010'
-    elif bits == '111':
-        rbits = '011'
-
-    return dividir_individuo(rbits)
-
-#   • 4 • 3 •   • 100 • 011 •
-#   5 • • • 2   101 • • • 010
-#   • • X • •     • • X • •
-#   6 • • • 1   110 • • • 001
-#   • 7 • 0 •   • 111 • 000 •
-
 # se envia el individuo en una lista de tuplas, en otras palabras una lista de movimientos
 def evaluar_individuo(individuo, tamaño_tablero): 
     individuo_interpretado = interpretar_individuo(individuo)
@@ -273,7 +246,6 @@ def se_alcanzo_solucion(poblacion_valores, numero_casillas):
     return False
 
 def algoritmo_genetico_KT():
-    tamaño_tablero = 5
     tamaño_individuo = tamaño_tablero*tamaño_tablero*3
 
     # Ya tenemos una poblacion inicial
